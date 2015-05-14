@@ -104,3 +104,8 @@ module.exports = (robot) ->
   robot.respond /sleep it off/i, (res) ->
     robot.brain.set 'totalSodas', 0
     res.reply 'zzzzz'
+
+  robot.respond /now/i, (res) ->
+    require 'date-utils'
+    now = new Date
+    res.reply now.toFormat("YYYY/MM/DD HH24:MI:SS")
