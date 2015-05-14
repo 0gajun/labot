@@ -9,3 +9,6 @@ deploy:
     master: sslab-hubot
   on:
     repo: Oga-Jun/labot
+
+notifications:
+  webhooks: https://sslab-hubot.herokuapp.com/notification/travis
