@@ -106,6 +106,5 @@ module.exports = (robot) ->
     res.reply 'zzzzz'
 
   robot.respond /now/i, (res) ->
-    require 'date-utils'
-    now = new Date
-    res.reply now.toFormat("YYYY/MM/DD HH24:MI:SS")
+    momentTz = require 'moment-timezone'
+    res.reply momentTz().tz("Asia/Tokyo").format "YYYY/MM/DD HH:mm:DD"
