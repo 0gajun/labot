@@ -105,6 +105,6 @@ module.exports = (robot) ->
     robot.brain.set 'totalSodas', 0
     res.reply 'zzzzz'
 
-  robot.respond /now/i, (res) ->
+  robot.hear /now/i, (res) ->
     momentTz = require 'moment-timezone'
     res.reply momentTz().tz("Asia/Tokyo").format "YYYY/MM/DD HH:mm:DD"
