@@ -1,3 +1,10 @@
 language: node_js
 node_js:
-    - "0.12"
+- '0.12'
+deploy:
+  provider: heroku
+  api_key:
+    secure: P+z8wt7SPzXWhU0WO6yUUnHNVY1XnWUbJ8wwZsmeurDy0AF8tvFn+s1o6vZ+rtCcdhV0mfn61J97O6q5O6VYEKG6IC6ZcldpM7/aoWE0UURyELDQkrg5QK5tsOUXPY2BNUWRceupayWROW9mK183gFg5fZb6mgubUXbqOgp6ytE=
+  app: sslab-hubot
+  on:
+    repo: Oga-Jun/labot
