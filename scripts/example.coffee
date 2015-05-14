@@ -107,4 +107,4 @@ module.exports = (robot) ->
 
   robot.hear /^now$/i, (res) ->
     momentTz = require 'moment-timezone'
-    res.reply momentTz().tz("Asia/Tokyo").format "YYYY/MM/DD HH:mm:DD"
+    res.reply momentTz().tz("Asia/Tokyo").format "YYYY/MM/DD HH:mm:ss"
