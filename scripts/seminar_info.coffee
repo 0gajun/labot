@@ -34,7 +34,7 @@ replyMsg = (res, json) ->
   res.send buildMsg json
 
 notifyMsg = (robot, res, json) ->
-  robot.messageRoom "global", buildMsg json
+  robot.messageRoom "general", buildMsg json
 
 buildMsg = (json) ->
   if (json.title == "")
