@@ -20,7 +20,9 @@
     "hubot-slack": "^3.3.0",
     "hubot-youtube": "^0.1.2",
     "moment": "^2.10.3",
-    "moment-timezone": "^0.3.1"
+    "moment-timezone": "^0.3.1",
+    "cron": "^1.0.5",
+    "time": "^0.11.0"
   },
   "engines": {
     "node": "0.10.x"
