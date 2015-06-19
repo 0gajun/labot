@@ -39,7 +39,7 @@ notifyMsg = (robot, res, json) ->
 buildMsg = (json) ->
   if (json.title == "")
     return "本日のセミナーはありません"
-  msg = "本日のセミナー情報です\n" + json.title + "\n"
+  msg = "@channel 本日のセミナー情報です\n" + json.title + "\n"
   msg += "場所:" + json.place + "\n"
   msg += "時間:" + json.start_time + "~" + json.end_time + "\n"
   return msg
