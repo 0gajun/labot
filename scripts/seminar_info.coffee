@@ -39,7 +39,7 @@ module.exports = (robot) ->
 
   # 翌日のゼミがない場合，日曜21時に通知するCron
   cronJobSun = new cron(
-    cronTime: "0 0 21 * * 7"
+    cronTime: "0 0 21 * * 0"
     start: true
     timeZone: "Asia/Tokyo"
     onTick: ->
@@ -47,7 +47,7 @@ module.exports = (robot) ->
   )
 
   # 翌日のゼミがない場合，木曜21時に通知するCron
-  cronJobSun = new cron(
+  cronJobThu = new cron(
     cronTime: "0 0 21 * * 4"
     start: true
     timeZone: "Asia/Tokyo"
