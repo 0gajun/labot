@@ -11,7 +11,7 @@ url = "https://script.google.com/macros/s/AKfycbx8q9tw9WotXTRKQNjnb6BzlkyHBzDSpm
 module.exports = (robot) ->
   # レスポンス用
   robot.respond /Seminar/i, (res) ->
-    request res, false
+    request res, replyMsg
   
   # Webhook用. 現在使用していない
   robot.router.post "/notification/seminar", (req, res) ->
@@ -25,7 +25,7 @@ module.exports = (robot) ->
     start: true
     timeZone: "Asia/Tokyo"
     onTick: -> 
-      request robot, true
+      request robot, notifyMsg
   )
 
   # 金曜12時に通知するCron
@@ -34,25 +34,40 @@ module.exports = (robot) ->
     start: true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      request robot, true
+      request robot, notifyMsg
   )
 
-request = (r, isCron) ->
-  https.get url, (response) ->
+  # 翌日のゼミがない場合，日曜21時に通知するCron
+  cronJobSun = new cron(
+    cronTime: "0 0 21 * * 7"
+    start: true
+    timeZone: "Asia/Tokyo"
+    onTick: ->
+      request robot, notifyIfHoliday
+  )
+
+  # 翌日のゼミがない場合，木曜21時に通知するCron
+  cronJobSun = new cron(
+    cronTime: "0 0 21 * * 4"
+    start: true
+    timeZone: "Asia/Tokyo"
+    onTick: ->
+      request robot, notifyIfHoliday
+  )
+
+request = (r, callback, offset = 0) ->
+  https.get "#{url}?offset=#{offset}", (response) ->
     redirUrl = response.headers.location
-    redir r, redirUrl, isCron
+    redir r, redirUrl, callback
 
 # GoogleAppScriptでデプロイしており，対象URLにアクセスすると
 # status 302で戻ってくるのでリダイレクトしなくてはならない
-redir = (r, redirUrl, isCron) ->
+redir = (r, redirUrl, callback) ->
   https.get redirUrl, (response) ->
     response.setEncoding 'utf8'
     response.on 'data', (body) ->
       json = JSON.parse(body)
-      if isCron 
-        notifyMsg r, json
-      else
-        replyMsg r, json
+      callback r, json
 
 replyMsg = (res, json) ->
   res.send buildMsg json
@@ -67,3 +82,7 @@ buildMsg = (json) ->
   msg += "場所:" + json.place + "\n"
   msg += "時間:" + json.start_time + "~" + json.end_time + "\n"
   return msg
+
+notifyIfHoliday = (robot, json) ->
+  if (json.title == "")
+    robot.messageRoom "general", "明日のセミナーはお休みです"
