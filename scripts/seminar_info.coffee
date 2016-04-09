@@ -43,7 +43,7 @@ module.exports = (robot) ->
     start: true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      request robot, notifyIfHoliday
+      request robot, notifyIfHoliday, 1
   )
 
   # 翌日のゼミがない場合，木曜21時に通知するCron
@@ -52,7 +52,7 @@ module.exports = (robot) ->
     start: true
     timeZone: "Asia/Tokyo"
     onTick: ->
-      request robot, notifyIfHoliday
+      request robot, notifyIfHoliday, 1
   )
 
 request = (r, callback, offset = 0) ->
