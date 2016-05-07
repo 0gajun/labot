@@ -85,4 +85,4 @@ buildMsg = (json) ->
 
 notifyIfHoliday = (robot, json) ->
   if (json.title == "")
-    robot.messageRoom "general", "明日のセミナーはお休みです"
+    robot.messageRoom "general", "<!channel> 明日のセミナーはお休みです"
