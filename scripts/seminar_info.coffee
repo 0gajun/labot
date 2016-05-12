@@ -28,9 +28,9 @@ module.exports = (robot) ->
       request robot, notifyMsg
   )
 
-  # 金曜12時に通知するCron
+  # 金曜10時に通知するCron
   cronjobFri = new cron(
-    cronTime: "0 0 12 * * 5"
+    cronTime: "0 0 10 * * 5"
     start: true
     timeZone: "Asia/Tokyo"
     onTick: ->
